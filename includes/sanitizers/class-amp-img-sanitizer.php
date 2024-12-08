@@ -581,7 +581,9 @@ class AMP_Img_Sanitizer extends AMP_Base_Sanitizer {
 		$ext  = self::$anim_extension;
 		$path = wp_parse_url( $url, PHP_URL_PATH );
 		// 检查$path是否为null，若是则赋值为空字符串
-		$path = $path?? '';
+		if ( null === $path ) {
+			return false;
+		}
 		return substr( $path, -strlen( $ext ) ) === $ext;
 	}
 
